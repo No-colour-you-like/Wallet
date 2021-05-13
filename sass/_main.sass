@@ -1,0 +1,153 @@
+.wallet 
+  display: flex
+  width: 1200px
+  height: 800px 
+  background-color: #fff
+  border-radius: 30px 
+  box-shadow: 0 10px 20px #8991B8FF
+  &__panel 
+    width: 400px 
+    height: 100%
+    padding: 50px
+    background-color: #EDF1FAFF
+    border-top-left-radius: 30px
+    border-bottom-left-radius: 30px
+  &__content 
+    width: 800px
+    padding: 50px
+
+.cards 
+  margin-bottom: 30px
+  &__title 
+    margin-bottom: 20px
+
+.card 
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  width: 300px 
+  height: 170px 
+  padding: 5px 20px 20px 
+  background: linear-gradient(200deg,#6F8BD4FF, #5779CDFF)
+  border-radius: 10px
+  color: #ffffff
+  &__header, &__middle, &__footer
+    display: flex
+    align-items: center
+    justify-content: space-between
+  &__dev-img 
+    width: 50px 
+  &__chip-img 
+    width: 40px
+  &__owner 
+    font-size: 20px
+    font-weight: 600
+  &__balance 
+    font-size: 18px 
+
+.transaction 
+  &__title 
+    margin-bottom: 10px
+  &__form 
+    display: flex
+    flex-direction: column 
+  &__label 
+    margin-bottom: 5px 
+  input, select 
+    padding: 15px 20px
+    margin-bottom: 15px
+    background-color: #DDE4F5FF
+    border: none
+    border-radius: 5px
+    font-size: 20px
+    color: #4A6EC9FF
+    font-weight: 600
+  &__confirm-btn 
+    margin: 15px auto
+    width: 240px 
+    padding: 10px 15px
+    color: #ffffff 
+    background-color: #FF6D02FF
+    border: none 
+    border-radius: 5px
+    font-size: 20px
+
+.spendings 
+  &__title
+    margin-bottom: 20px
+  &__content
+    display: flex
+    align-items: center
+  &__single 
+    margin-right: 50px
+    &-title 
+      font-size: 16px
+      margin-bottom: 5px
+      font-weight: 600
+      color: #BABABAFF
+    &-amount 
+      font-size: 30px
+      font-weight: 600
+    &:nth-of-type(1)
+      .spendings__single-amount
+        color: #4A6EC9FF 
+    &:nth-of-type(2)
+      .spendings__single-amount
+        color: #21BF73FF
+    &:nth-of-type(3)
+      .spendings__single-amount
+        color: #FD5E53FF
+
+.transaction-history 
+  width: 720px
+  &__title 
+    margin-bottom: 20px 
+  &__header 
+    display: flex
+    align-items: center 
+    margin-bottom: 5px
+  &__descr 
+    &:nth-of-type(1)
+      width: 200px
+    &:nth-of-type(2)
+      width: 150px
+    &:nth-of-type(3)
+      width: 110px
+    &:nth-of-type(4)
+      width: 110px
+    &:nth-of-type(5)
+      text-align: right
+      width: 130px
+  &__content 
+    height: 350px
+    overflow-y: scroll
+  &__content
+    &::-webkit-scrollbar 
+      width: 6px
+      height: 100%
+    &::-webkit-scrollbar-track 
+      border-radius: 100px
+    &::-webkit-scrollbar-thumb 
+      background: #5779CDFF
+      border-radius: 20px
+
+.single-transaction 
+  display: flex
+  align-items: center
+  padding: 10px 0px
+  font-size: 20px
+  font-weight: 600
+  border-bottom: 1px solid #ECECECFF
+  &__info
+    &:nth-of-type(1)
+      width: 200px
+    &:nth-of-type(2)
+      width: 150px
+    &:nth-of-type(3)
+      width: 110px
+    &:nth-of-type(4)
+      width: 110px
+    &:nth-of-type(5)
+      text-align: right
+      width: 130px
+      

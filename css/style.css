@@ -1,0 +1,280 @@
+@font-face {
+  font-family: "Futuralightc";
+  src: url("../fonts/futuralightc.woff2") format("woff2"), url("../fonts/futuralightc.otf") format("otf");
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Futuralightc', sans-serif;
+  width: 100%;
+  margin: 0 auto;
+}
+
+input, button, textarea {
+  font-family: 'Futuralightc', sans-serif;
+  outline: none;
+}
+
+button {
+  font-family: 'Futuralightc', sans-serif;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+a, a:visited, a:hover {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+.body__wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#C9D4EFFF, #C4CFEAFF);
+}
+
+.wallet {
+  display: flex;
+  width: 1200px;
+  height: 800px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px #8991B8FF;
+}
+
+.wallet__panel {
+  width: 400px;
+  height: 100%;
+  padding: 50px;
+  background-color: #EDF1FAFF;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.wallet__content {
+  width: 800px;
+  padding: 50px;
+}
+
+.cards {
+  margin-bottom: 30px;
+}
+
+.cards__title {
+  margin-bottom: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 170px;
+  padding: 5px 20px 20px;
+  background: linear-gradient(200deg, #6F8BD4FF, #5779CDFF);
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.card__header, .card__middle, .card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__dev-img {
+  width: 50px;
+}
+
+.card__chip-img {
+  width: 40px;
+}
+
+.card__owner {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card__balance {
+  font-size: 18px;
+}
+
+.transaction__title {
+  margin-bottom: 10px;
+}
+
+.transaction__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction__label {
+  margin-bottom: 5px;
+}
+
+.transaction input, .transaction select {
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  background-color: #DDE4F5FF;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #4A6EC9FF;
+  font-weight: 600;
+}
+
+.transaction__confirm-btn {
+  margin: 15px auto;
+  width: 240px;
+  padding: 10px 15px;
+  color: #ffffff;
+  background-color: #FF6D02FF;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.spendings__title {
+  margin-bottom: 20px;
+}
+
+.spendings__content {
+  display: flex;
+  align-items: center;
+}
+
+.spendings__single {
+  margin-right: 50px;
+}
+
+.spendings__single-title {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #BABABAFF;
+}
+
+.spendings__single-amount {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.spendings__single:nth-of-type(1) .spendings__single-amount {
+  color: #4A6EC9FF;
+}
+
+.spendings__single:nth-of-type(2) .spendings__single-amount {
+  color: #21BF73FF;
+}
+
+.spendings__single:nth-of-type(3) .spendings__single-amount {
+  color: #FD5E53FF;
+}
+
+.transaction-history {
+  width: 720px;
+}
+
+.transaction-history__title {
+  margin-bottom: 20px;
+}
+
+.transaction-history__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.transaction-history__descr:nth-of-type(1) {
+  width: 200px;
+}
+
+.transaction-history__descr:nth-of-type(2) {
+  width: 150px;
+}
+
+.transaction-history__descr:nth-of-type(3) {
+  width: 110px;
+}
+
+.transaction-history__descr:nth-of-type(4) {
+  width: 110px;
+}
+
+.transaction-history__descr:nth-of-type(5) {
+  text-align: right;
+  width: 130px;
+}
+
+.transaction-history__content {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.transaction-history__content::-webkit-scrollbar {
+  width: 6px;
+  height: 100%;
+}
+
+.transaction-history__content::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.transaction-history__content::-webkit-scrollbar-thumb {
+  background: #5779CDFF;
+  border-radius: 20px;
+}
+
+.single-transaction {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 1px solid #ECECECFF;
+}
+
+.single-transaction__info:nth-of-type(1) {
+  width: 200px;
+}
+
+.single-transaction__info:nth-of-type(2) {
+  width: 150px;
+}
+
+.single-transaction__info:nth-of-type(3) {
+  width: 110px;
+}
+
+.single-transaction__info:nth-of-type(4) {
+  width: 110px;
+}
+
+.single-transaction__info:nth-of-type(5) {
+  text-align: right;
+  width: 130px;
+}

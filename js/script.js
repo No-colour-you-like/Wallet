@@ -9,8 +9,14 @@ const transactionNameInput = document.querySelector('#transaction-descr-input'),
   transactionHistory = document.querySelector('#transaction-history'),
   balanceCurrent = document.querySelector('#balance-current'),
   balanceUp = document.querySelector('#balance-up'),
-  balanceDown = document.querySelector('#balance-down');
+  balanceDown = document.querySelector('#balance-down'),
+  cardsPrevBtn = document.querySelector('#cards-prev-btn'),
+  cardsNextBtn = document.querySelector('#cards-next-btn'),
+  cardsSlider = document.querySelector('#cards-slider');
 
+let cards = cardsSlider.querySelectorAll('.card__wrapper');
+let myChart;
+let transactionsDates;
 
 function TransactionInfo(trName, type, card, date, amount) {
   this.trName = trName;
@@ -20,12 +26,64 @@ function TransactionInfo(trName, type, card, date, amount) {
   this.amount = amount;
 }
 
+function CardSingleInfo(id, name, number, owner, balance) {
+  this.id = id;
+  this.name = name;
+  this.number = `**** **** **** ${number}`;
+  this.owner = owner;
+  this.balance = `${balance} $`;
+}
+
 const transactionsArr = [
-  new TransactionInfo('Зарплата', 'Поплнение', 1234, '12.05.2021', 1000)
+  new TransactionInfo('Зарплата', 'Пополнение', '···· 1234', '12.05.2021', 1000)
 ];
 
-let myChart;
-let transactionsDates;
+const cardsArr = [
+  new CardSingleInfo('0', 'Персональная карта', '1234', 'Jack Jackson', 20000),
+  new CardSingleInfo('1', 'Рабочая карта', '6789', 'Jack Jackson', 10000)
+];
+
+const addNewCard = (id, name, number, owner, balance, active = '') => {
+
+  const newCard = document.createElement('div');
+
+  if (id == 0) {
+    newCard.className = 'card__wrapper active-card';
+  } else {
+    newCard.className = 'card__wrapper';
+  }
+
+  newCard.setAttribute('id', `card-number-${id}`)
+  newCard.innerHTML = `
+    <div class="card">
+      <div class="card__header">
+        <h3 class="card__name">${name}</h3>
+        <img src="img/visa.svg" alt="card-dev" class="card__dev-img">
+      </div>
+      <div class="card__middle">
+        <img src="img/credit-card.svg" alt="card-chip" class="card__chip-img">
+        <div id="card-number" class="card__number">${number}</div>
+      </div>
+      <div class="card__footer">
+        <p class="card__owner">${owner}</p>
+        <div class="card__balance">${balance}</div>
+      </div>
+    </div>
+  `;
+
+  cardsSlider.append(newCard);
+  cards = cardsSlider.querySelectorAll('.card__wrapper');
+};
+
+
+const addAllCards = () => {
+  cardsArr.forEach((card, i) => {
+    addNewCard(cardsArr[i].id, cardsArr[i].name, cardsArr[i].number, cardsArr[i].owner, cardsArr[i].balance);
+  });
+};
+
+addAllCards();
+
 
 const createNewTransaction = () => {
   const transactionName = transactionNameInput.value,
@@ -33,10 +91,10 @@ const createNewTransaction = () => {
     transactionDate = transactionDateInput.value,
     transactionAmount = +transactionAmountInput.value;
 
-  if (transactionName !== '' && transactionType !== '' && transactionDate !== '' && transactionAmount !== '') {
-    const cardNumberShort = `···· ${cardNumber.textContent.slice(-4)}`;
+  const activeCardShortNumber = document.querySelector('.active-card').querySelector('#card-number').textContent.slice(-9);
 
-    const transaction = new TransactionInfo(transactionName, transactionType, cardNumberShort, transactionDate, transactionAmount);
+  if (transactionName !== '' && transactionType !== '' && transactionDate !== '' && transactionAmount !== '') {
+    const transaction = new TransactionInfo(transactionName, transactionType, activeCardShortNumber, transactionDate, transactionAmount);
 
     transactionsArr.push(transaction);
     addTransactionToList();
@@ -143,7 +201,7 @@ const updateChart = () => {
     options: {
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: false
         },
         x: {
           grid: {
@@ -169,3 +227,45 @@ createNewTransaction();
 addTransactionToList();
 changeBalances();
 
+//Change active card
+const cardWidth = +getComputedStyle(cards[0]).width.slice(0, -2);
+const cardsAmount = +cards.length - 1;
+
+let offsetSlider = 0;
+let cardPosition = 0;
+
+const removeActiveCardClass = () => {
+  cards.forEach(card => {
+    card.classList.remove('active-card');
+  });
+};
+
+cardsNextBtn.addEventListener('click', () => {
+  removeActiveCardClass();
+
+  if (offsetSlider >= 0 && offsetSlider !== +cardWidth * cardsAmount) {
+    offsetSlider += cardWidth;
+    cards[++cardPosition].classList.add('active-card');
+  } else if (offsetSlider === +cardWidth * cardsAmount) {
+    offsetSlider = 0;
+    cardPosition = 0;
+    cards[cardPosition].classList.add('active-card');
+  }
+
+  cardsSlider.style.transform = `translateX(-${offsetSlider}px)`;
+});
+
+cardsPrevBtn.addEventListener('click', () => {
+  removeActiveCardClass();
+
+  if (offsetSlider === 0) {
+    offsetSlider = +cardWidth * cardsAmount;
+    cardPosition = cards.length - 1;
+    cards[cardPosition].classList.add('active-card');
+  } else if (offsetSlider >= 0) {
+    offsetSlider -= cardWidth;
+    cards[--cardPosition].classList.add('active-card');
+  }
+
+  cardsSlider.style.transform = `translateX(-${offsetSlider}px)`;
+});

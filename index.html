@@ -20,20 +20,12 @@
       <aside class="wallet__panel">
         <div class="cards">
           <h2 class="cards__title">Ваши карты</h2>
-          <div class="cards__content">
-            <div class="card">
-              <div class="card__header">
-                <h3 class="card__name">Персональная карта</h3>
-                <img src="img/visa.svg" alt="card-dev" class="card__dev-img">
-              </div>
-              <div class="card__middle">
-                <img src="img/credit-card.svg" alt="card-chip" class="card__chip-img">
-                <div id="card-number" class="card__number">1234 5678 7890 1234</div>
-              </div>
-              <div class="card__footer">
-                <p class="card__owner">Jack Jackson</p>
-                <div class="card__balance">$ 50 000</div>
-              </div>
+          <div class="cards__slide-btns">
+            <div id="cards-prev-btn" class="cards__slide-btn">&#10140</div>
+            <div id="cards-next-btn" class="cards__slide-btn">&#10140</div>
+          </div>
+          <div id="cards-content" class="cards__content">
+            <div id="cards-slider" class="cards__slider">
             </div>
           </div>
         </div>
@@ -58,7 +50,11 @@
             </select>
             <label for="transaction-amount-input" class="transaction__label">Дата транзакции</label>
             <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата">
-            <label for="transaction-amount-input" class="transaction__label">Сумма транзакции</label>
+            <label for="transaction-amount-input" class="transaction__label">
+              Сумма транзакции
+              <br>
+              (Отрицательное значение - расходы)
+            </label>
             <input id="transaction-amount-input" type="number" class="transaction__amount-input" placeholder="Сумма">
             <button id="transaction-confirm-btn" class="transaction__confirm-btn">Добавить</button>
           </form>

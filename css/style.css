@@ -81,6 +81,7 @@ h2 {
 }
 
 .cards {
+  position: relative;
   margin-bottom: 30px;
 }
 
@@ -88,16 +89,61 @@ h2 {
   margin-bottom: 20px;
 }
 
+.cards__content {
+  overflow: hidden;
+}
+
+.cards__slider {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: 0.5s;
+}
+
+.cards__slide-btns {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  right: 0;
+}
+
+.cards__slide-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: #c7d6f7;
+  border-radius: 50%;
+  color: #4A6EC9FF;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cards__slide-btn:first-child {
+  transform: rotate(180deg);
+}
+
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 300px;
+  min-width: 280px;
   height: 170px;
   padding: 5px 20px 20px;
   background: linear-gradient(200deg, #6F8BD4FF, #5779CDFF);
   border-radius: 10px;
   color: #ffffff;
+}
+
+.card__wrapper {
+  padding: 10px;
+}
+
+.card__wrapper:nth-of-type(2) .card {
+  background: linear-gradient(200deg, #f8a970, #e0782d);
 }
 
 .card__header, .card__middle, .card__footer {
@@ -121,6 +167,11 @@ h2 {
 
 .card__balance {
   font-size: 18px;
+}
+
+.card__number {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .transaction__title {
@@ -148,7 +199,7 @@ h2 {
 }
 
 .transaction__confirm-btn {
-  margin: 15px auto;
+  margin: 5px auto;
   width: 240px;
   padding: 10px 15px;
   color: #ffffff;

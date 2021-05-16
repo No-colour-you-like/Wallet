@@ -46,7 +46,15 @@
             <label for="transaction-amount-input" class="transaction__label">Тип транзакции</label>
             <select id="transaction-type-input" name="transaction-type" class="transaction__type-select">
               <option value="" disabled selected>Выберите категорию</option>
+              <option value="Пополнения">Пополнения</option>
+              <option value="Переводы">Переводы</option>
               <option value="Продукты">Продукты</option>
+              <option value="Медицина">Медицина</option>
+              <option value="Рестораны">Рестораны</option>
+              <option value="Услуги">Услуги</option>
+              <option value="Развлечения">Развлечения</option>
+              <option value="Транспорт">Транспорт</option>
+              <option value="Другое">Другое</option>
             </select>
             <label for="transaction-amount-input" class="transaction__label">Дата транзакции</label>
             <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата">
@@ -62,21 +70,21 @@
           <div class="spendings__content">
             <div class="spendings__single">
               <p class="spendings__single-title">Текущий баланс</p>
-              <div class="spendings__single-amount">124 720 $</div>
+              <div id="balance-current" class="spendings__single-amount">0</div>
             </div>
             <div class="spendings__single">
               <p class="spendings__single-title">Доходы</p>
-              <div class="spendings__single-amount">50 689 $</div>
+              <div id="balance-up" class="spendings__single-amount">0</div>
             </div>
             <div class="spendings__single">
               <p class="spendings__single-title">Расходы</p>
-              <div class="spendings__single-amount">500 720 $</div>
+              <div id="balance-down" class="spendings__single-amount">0</div>
             </div>
           </div>
 
         </div>
         <div class="spendings__chart">
-          <canvas class="myChart"></canvas>
+          <canvas id="myChart" class="chart" width="700px" height="300px"></canvas>
         </div>
         <div class="transaction-history">
           <h2 class="transaction-history__title">Все транзакции</h2>
@@ -88,20 +96,15 @@
             <p class="transaction-history__descr">Сумма</p>
           </div>
           <div id="transaction-history" class="transaction-history__content">
-            <div class="single-transaction">
-              <p class="single-transaction__info">Продукты</p>
-              <p class="single-transaction__info">Покупки</p>
-              <p class="single-transaction__info">1234</p>
-              <p class="single-transaction__info">12.05.2021</p>
-              <p class="single-transaction__info">140 $</p>
-            </div>
           </div>
         </div>
       </div>
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
   <script src="js/script.js"></script>
+
 
 </body>
 

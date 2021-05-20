@@ -37,8 +37,8 @@
               placeholder="Название транзакции">
             <label for="transaction-amount-input" class="transaction__label">Тип транзакции</label>
             <select id="transaction-type-input" name="transaction-type" class="transaction__type-select">
-              <option value="" disabled selected>Выберите категорию</option>
-              <option value="Пополнения">Пополнения</option>
+              <option value="">Выберите категорию</option>
+              <option value="Пополнения" selected>Пополнения</option>
               <option value="Переводы">Переводы</option>
               <option value="Продукты">Продукты</option>
               <option value="Медицина">Медицина</option>
@@ -49,13 +49,13 @@
               <option value="Другое">Другое</option>
             </select>
             <label for="transaction-amount-input" class="transaction__label">Дата транзакции</label>
-            <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата">
+            <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата" value='2020-01-21'>
             <label for="transaction-amount-input" class="transaction__label">
               Сумма транзакции
               <br>
               (Отрицательное значение - расходы)
             </label>
-            <input id="transaction-amount-input" type="number" class="transaction__amount-input" placeholder="Сумма">
+            <input id="transaction-amount-input" value='100' type="number" class="transaction__amount-input" placeholder="Сумма">
             <button id="transaction-confirm-btn" class="transaction__confirm-btn">Добавить</button>
           </form>
         </div>

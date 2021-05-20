@@ -15,10 +15,12 @@ const transactionNameInput = document.querySelector('#transaction-descr-input'),
   cardsSlider = document.querySelector('#cards-slider');
 
 let cards = cardsSlider.querySelectorAll('.card__wrapper');
+let activeCard;
 let myChart;
 let transactionsDates;
-let transactionsBlocks;
 let removeTransactionBtn;
+const balanceAmounts = [];
+
 
 function TransactionInfo(cardId, trName, type, card, date, amount) {
   this.cardId = cardId;
@@ -38,7 +40,7 @@ function CardSingleInfo(id, name, number, owner, balance) {
 }
 
 const transactionsArr = [
-  new TransactionInfo('0','Зарплата', 'Пополнение', '**** 1234', '12.05.2021', 1000)
+  new TransactionInfo('0', 'Зарплата', 'Пополнение', '**** 1234', '12.05.2021', 1000)
 ];
 
 const cardsArr = [
@@ -47,7 +49,6 @@ const cardsArr = [
 ];
 
 const addNewCard = (id, name, number, owner, balance) => {
-
   const newCard = document.createElement('div');
 
   if (id == 0) {
@@ -89,8 +90,7 @@ addAllCards();
 
 
 const createNewTransaction = () => {
-
-  const activeCard = document.querySelector('.active-card');
+  activeCard = document.querySelector('.active-card');
 
   const cardId = activeCard.getAttribute('id').slice(-1),
     transactionName = transactionNameInput.value,
@@ -113,6 +113,9 @@ const createNewTransaction = () => {
     return transaction.date;
   });
 
+  
+  balanceAmounts.push(calculateBalance(transactionsArr));
+
   myChart.destroy();
   updateChart();
 
@@ -133,8 +136,8 @@ const calculateCardBalance = (id) => {
   const sumBalance = cardBalance.reduce(function (accumulator, currentValue) {
     return accumulator + currentValue.amount;
   }, 0);
-  
-  return sumBalance
+
+  return sumBalance;
 };
 
 
@@ -172,8 +175,6 @@ const addTransactionToList = () => {
 };
 
 //Change balances
-const balanceAmounts = [];
-
 const calculateBalance = (transactions) => {
   const sumBalances = transactions.reduce(function (accumulator, currentValue) {
     return accumulator + currentValue.amount;
@@ -195,8 +196,6 @@ const changeBalances = () => {
   balanceCurrent.textContent = calculateBalance(transactionsArr) + ' $';
   balanceUp.textContent = calculateBalance(positiveTransactionsArr) + ' $';
   balanceDown.textContent = calculateBalance(negativeTransactionsArr) + ' $';
-
-  balanceAmounts.push(calculateBalance(transactionsArr));
 };
 
 
@@ -298,29 +297,36 @@ changeBalances();
 const updateTransactions = () => {
   removeTransactionBtn = document.querySelectorAll('.single-transaction__close-btn');
 
-  // removeTransactionBtn.forEach((btn, i) => {
-  //   btn.addEventListener('click', (e) => {
-  //     removeTransactionBtn = document.querySelectorAll('.single-transaction__close-btn');
-  //     e.currentTarget.parentElement.remove();
-  //     transactionsArr.splice(i, 1);
-  //     changeBalances();
-  //     console.log(btn)
-  //   });
-  // })
-
-  for (let i = 0; i < removeTransactionBtn.length; i++) {
-    let btn = removeTransactionBtn[i];
+  removeTransactionBtn.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      removeTransactionBtn = document.querySelectorAll('.single-transaction__close-btn');
       e.currentTarget.parentElement.remove();
-      transactionsArr.splice(i, 1);
-      changeBalances();
-    })
-  }
 
+      const transactionIndex = Array.from(removeTransactionBtn).indexOf(e.target);
+
+      if (transactionIndex !== -1) {
+        transactionsArr.splice(transactionIndex, 1);
+        balanceAmounts.splice(transactionIndex, 1);
+        changeBalances();
+
+        console.log(balanceAmounts);
+        activeCard = document.querySelector('.active-card');
+        const cardId = activeCard.getAttribute('id').slice(-1);
+
+        activeCard.querySelector('.card__balance').textContent = calculateCardBalance(cardId) + ' $';
+
+        transactionsDates = transactionsArr.map(transaction => {
+          return transaction.date;
+        });
+      
+        
+
+        myChart.destroy();
+        updateChart();
+      }
+
+      removeTransactionBtn = document.querySelectorAll('.single-transaction__close-btn');
+    });
+  });
 };
- 
+
 updateTransactions();
-
-
-

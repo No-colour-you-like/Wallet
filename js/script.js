@@ -113,8 +113,8 @@ const createNewTransaction = () => {
     return transaction.date;
   });
 
-  
-  balanceAmounts.push(calculateBalance(transactionsArr));
+
+  balanceAmounts.unshift(calculateBalance(transactionsArr));
 
   myChart.destroy();
   updateChart();
@@ -306,9 +306,18 @@ const updateTransactions = () => {
       if (transactionIndex !== -1) {
         transactionsArr.splice(transactionIndex, 1);
         balanceAmounts.splice(transactionIndex, 1);
+
+        for (let i = 0; i < balanceAmounts.length; i++) {
+          if (i >= transactionIndex) {
+            continue;
+          }
+
+          balanceAmounts[i] -= transactionsArr[transactionIndex - 1].amount;
+          console.log(balanceAmounts);
+        }
+
         changeBalances();
 
-        console.log(balanceAmounts);
         activeCard = document.querySelector('.active-card');
         const cardId = activeCard.getAttribute('id').slice(-1);
 
@@ -317,8 +326,8 @@ const updateTransactions = () => {
         transactionsDates = transactionsArr.map(transaction => {
           return transaction.date;
         });
-      
-        
+
+
 
         myChart.destroy();
         updateChart();

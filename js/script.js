@@ -19,7 +19,7 @@ let activeCard;
 let myChart;
 let transactionsDates;
 let removeTransactionBtn;
-const balanceAmounts = [];
+let balanceAmounts = [];
 
 
 function TransactionInfo(cardId, trName, type, card, date, amount) {
@@ -109,12 +109,11 @@ const createNewTransaction = () => {
     updateTransactions();
   }
 
+  balanceAmounts.unshift(calculateBalance(transactionsArr));
+
   transactionsDates = transactionsArr.map(transaction => {
     return transaction.date;
   });
-
-
-  balanceAmounts.unshift(calculateBalance(transactionsArr));
 
   myChart.destroy();
   updateChart();
@@ -160,7 +159,9 @@ const addTransactionToList = () => {
     <p class="single-transaction__info">${lastTransaction.card}</p>
     <p class="single-transaction__info">${lastTransaction.date}</p>
     <p class="single-transaction__info single-transaction__amount">${lastTransaction.amount + ' $'}</p>
-    <div class="single-transaction__close-btn">Закрыть</div>
+    <div class="single-transaction__close-btn">
+      <img class="single-transaction__close-btn-img" src="img/close.svg" alt="close-btn">
+    </div>
   `;
 
   const transactionAmount = transaction.querySelector('.single-transaction__amount');
@@ -228,8 +229,9 @@ const updateChart = () => {
         },
         x: {
           grid: {
-            display: false
-          }
+            display: true
+          },
+          reverse: true
         }
       },
       plugins: {
@@ -294,6 +296,7 @@ createNewTransaction();
 addTransactionToList();
 changeBalances();
 
+
 const updateTransactions = () => {
   removeTransactionBtn = document.querySelectorAll('.single-transaction__close-btn');
 
@@ -302,32 +305,30 @@ const updateTransactions = () => {
       e.currentTarget.parentElement.remove();
 
       const transactionIndex = Array.from(removeTransactionBtn).indexOf(e.target);
-
+      console.log(Array.from(removeTransactionBtn).indexOf(e.target));
       if (transactionIndex !== -1) {
-        transactionsArr.splice(transactionIndex, 1);
-        balanceAmounts.splice(transactionIndex, 1);
-
+        
         for (let i = 0; i < balanceAmounts.length; i++) {
           if (i >= transactionIndex) {
             continue;
           }
-
-          balanceAmounts[i] -= transactionsArr[transactionIndex - 1].amount;
-          console.log(balanceAmounts);
+          balanceAmounts[i] -= transactionsArr[transactionIndex].amount;
         }
 
+        const cardId = transactionsArr[transactionIndex].cardId;
+        const cardBalance = (id) => {
+          document.querySelector(`#card-number-${id}`).querySelector('.card__balance').textContent = calculateCardBalance(id) + ' $';
+        };
+
+        transactionsArr.splice(transactionIndex, 1);
+        balanceAmounts.splice(transactionIndex, 1);
+        cardBalance(cardId);
         changeBalances();
 
-        activeCard = document.querySelector('.active-card');
-        const cardId = activeCard.getAttribute('id').slice(-1);
-
-        activeCard.querySelector('.card__balance').textContent = calculateCardBalance(cardId) + ' $';
 
         transactionsDates = transactionsArr.map(transaction => {
           return transaction.date;
         });
-
-
 
         myChart.destroy();
         updateChart();

@@ -166,7 +166,8 @@ h2 {
 }
 
 .card__balance {
-  font-size: 18px;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .card__number {
@@ -279,7 +280,7 @@ h2 {
 
 .transaction-history__descr:nth-of-type(5) {
   text-align: right;
-  width: 130px;
+  width: 120px;
 }
 
 .transaction-history__content {
@@ -302,12 +303,18 @@ h2 {
 }
 
 .single-transaction {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 10px 0px;
   font-size: 20px;
   font-weight: 600;
   border-bottom: 1px solid #ECECECFF;
+}
+
+.single-transaction:hover .single-transaction__close-btn {
+  opacity: 1;
+  transition: 0.3s;
 }
 
 .single-transaction__info:nth-of-type(1) {
@@ -328,13 +335,20 @@ h2 {
 
 .single-transaction__info:nth-of-type(5) {
   text-align: right;
-  width: 130px;
+  width: 120px;
 }
 
 .single-transaction__close-btn {
-  width: 50px;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.single-transaction__close-btn-img {
+  pointer-events: none;
 }
 
 .chart {

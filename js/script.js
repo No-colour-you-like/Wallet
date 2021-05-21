@@ -151,9 +151,19 @@ transactionConfirmBtn.addEventListener('click', (e) => {
 const addTransactionToList = () => {
   const lastTransaction = transactionsArr[0];
 
+  let transactionImg;
+
+  if (lastTransaction.type = 'Продукты') {
+    transactionImg = 'img/cart.svg';
+  }
+
+
   const transaction = document.createElement('div');
   transaction.className = 'single-transaction';
   transaction.innerHTML = `
+    <div class="single-transaction__icon">
+      <img class="single-transaction__icon-img" src="${transactionImg}" alt="tr-img">
+    </div>
     <p class="single-transaction__info">${lastTransaction.trName}</p>
     <p class="single-transaction__info">${lastTransaction.type}</p>
     <p class="single-transaction__info">${lastTransaction.card}</p>
@@ -307,7 +317,7 @@ const updateTransactions = () => {
       const transactionIndex = Array.from(removeTransactionBtn).indexOf(e.target);
       console.log(Array.from(removeTransactionBtn).indexOf(e.target));
       if (transactionIndex !== -1) {
-        
+
         for (let i = 0; i < balanceAmounts.length; i++) {
           if (i >= transactionIndex) {
             continue;

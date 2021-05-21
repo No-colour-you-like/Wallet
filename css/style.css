@@ -60,7 +60,7 @@ h2 {
 .wallet {
   display: flex;
   width: 1200px;
-  height: 800px;
+  height: 830px;
   background-color: #fff;
   border-radius: 30px;
   box-shadow: 0 10px 20px #8991B8FF;
@@ -284,7 +284,7 @@ h2 {
 }
 
 .transaction-history__content {
-  height: 180px;
+  height: 220px;
   overflow-y: scroll;
 }
 
@@ -349,6 +349,21 @@ h2 {
 
 .single-transaction__close-btn-img {
   pointer-events: none;
+}
+
+.single-transaction__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #DDE4F5FF;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.single-transaction__icon-img {
+  width: 25px;
+  height: 25px;
 }
 
 .chart {

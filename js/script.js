@@ -21,7 +21,6 @@ let transactionsDates;
 let removeTransactionBtn;
 let balanceAmounts = [];
 
-
 function TransactionInfo(cardId, trName, type, card, date, amount) {
   this.cardId = cardId;
   this.trName = trName;
@@ -48,6 +47,8 @@ const cardsArr = [
   new CardSingleInfo('1', 'Рабочая карта', '6789', 'Jack Jackson', 0)
 ];
 
+
+// Add new credic active card
 const addNewCard = (id, name, number, owner, balance) => {
   const newCard = document.createElement('div');
 
@@ -79,7 +80,7 @@ const addNewCard = (id, name, number, owner, balance) => {
   cards = cardsSlider.querySelectorAll('.card__wrapper');
 };
 
-
+// Add all credit cards
 const addAllCards = () => {
   cardsArr.forEach((card, i) => {
     addNewCard(cardsArr[i].id, cardsArr[i].name, cardsArr[i].number, cardsArr[i].owner, cardsArr[i].balance);
@@ -88,7 +89,7 @@ const addAllCards = () => {
 
 addAllCards();
 
-
+// Create transaction in panel
 const createNewTransaction = () => {
   activeCard = document.querySelector('.active-card');
 
@@ -100,30 +101,30 @@ const createNewTransaction = () => {
 
   const activeCardShortNumber = document.querySelector('.active-card').querySelector('#card-number').textContent.slice(-9);
 
-  if (transactionName !== '' && transactionType !== '' && transactionDate !== '' && transactionAmount !== '') {
+  if (transactionName !== '' && transactionType !== '' && transactionDate !== '' && transactionAmount !== '' && transactionAmount !== 0) {
     const transaction = new TransactionInfo(cardId, transactionName, transactionType, activeCardShortNumber, transactionDate, transactionAmount);
 
     transactionsArr.unshift(transaction);
     changeBalances();
     addTransactionToList();
     updateTransactions();
+
+    balanceAmounts.unshift(calculateBalance(transactionsArr));
+
+    transactionsDates = transactionsArr.map(transaction => {
+      return transaction.date;
+    });
+
+    myChart.destroy();
+    updateChart();
+
+    activeCard.querySelector('.card__balance').textContent = calculateCardBalance(cardId) + ' $';
+
+    transactionNameInput.value = '';
+    transactionTypeInput.value = '';
+    transactionDateInput.value = '';
+    transactionAmountInput.value = '';
   }
-
-  balanceAmounts.unshift(calculateBalance(transactionsArr));
-
-  transactionsDates = transactionsArr.map(transaction => {
-    return transaction.date;
-  });
-
-  myChart.destroy();
-  updateChart();
-
-  // transactionNameInput.value = '';
-  // transactionTypeInput.value = '';
-  // transactionDateInput.value = '';
-  // transactionAmountInput.value = '';
-
-  activeCard.querySelector('.card__balance').textContent = calculateCardBalance(cardId) + ' $';
 };
 
 //Filter card by id and calculate balance
@@ -147,16 +148,45 @@ transactionConfirmBtn.addEventListener('click', (e) => {
 });
 
 
-//Creacte transaction element and push in HTML
+//Creacte transaction element and push in list HTML
 const addTransactionToList = () => {
   const lastTransaction = transactionsArr[0];
 
   let transactionImg;
 
-  if (lastTransaction.type = 'Продукты') {
-    transactionImg = 'img/cart.svg';
-  }
+  const transactionImgLink = (fileName) => {
+    transactionImg = `img/icons/${fileName}`;
+  };
 
+  switch (lastTransaction.type) {
+    case 'Пополнение':
+      transactionImgLink('refund.svg');
+      break;
+    case 'Переводы':
+      transactionImgLink('dollar.svg');
+      break;
+    case 'Продукты':
+      transactionImgLink('cart.svg');
+      break;
+    case 'Медицина':
+      transactionImgLink('heart.svg');
+      break;
+    case 'Рестораны':
+      transactionImgLink('burger.svg');
+      break;
+    case 'Услуги':
+      transactionImgLink('tools.svg');
+      break;
+    case 'Развлечения':
+      transactionImgLink('popcorn.svg');
+      break;
+    case 'Транспорт':
+      transactionImgLink('bus.svg');
+      break;
+    case 'Другое':
+      transactionImgLink('credit-card.svg');
+      break;
+  }
 
   const transaction = document.createElement('div');
   transaction.className = 'single-transaction';
@@ -194,7 +224,7 @@ const calculateBalance = (transactions) => {
   return sumBalances;
 };
 
-// Change balance and chart
+// Change main balances 
 const changeBalances = () => {
   const negativeTransactionsArr = transactionsArr.filter(transaction => {
     return transaction.amount <= 0;
@@ -209,8 +239,7 @@ const changeBalances = () => {
   balanceDown.textContent = calculateBalance(negativeTransactionsArr) + ' $';
 };
 
-
-//Chart
+//Chart settings
 const ctx = document.querySelector('#myChart').getContext('2d');
 const updateChart = () => {
   myChart = new Chart(ctx, {
@@ -257,7 +286,7 @@ const updateChart = () => {
   });
 };
 
-//Change active card
+//Change and slide active card
 const cardWidth = +getComputedStyle(cards[0]).width.slice(0, -2);
 const cardsAmount = +cards.length - 1;
 
@@ -300,13 +329,7 @@ cardsPrevBtn.addEventListener('click', () => {
   cardsSlider.style.transform = `translateX(-${offsetSlider}px)`;
 });
 
-
-updateChart();
-createNewTransaction();
-addTransactionToList();
-changeBalances();
-
-
+// Update new transactions in node
 const updateTransactions = () => {
   removeTransactionBtn = document.querySelectorAll('.single-transaction__close-btn');
 
@@ -315,9 +338,8 @@ const updateTransactions = () => {
       e.currentTarget.parentElement.remove();
 
       const transactionIndex = Array.from(removeTransactionBtn).indexOf(e.target);
-      console.log(Array.from(removeTransactionBtn).indexOf(e.target));
-      if (transactionIndex !== -1) {
 
+      if (transactionIndex !== -1) {
         for (let i = 0; i < balanceAmounts.length; i++) {
           if (i >= transactionIndex) {
             continue;
@@ -349,4 +371,9 @@ const updateTransactions = () => {
   });
 };
 
+balanceAmounts.unshift(calculateBalance(transactionsArr));
+updateChart();
+createNewTransaction();
+addTransactionToList();
+changeBalances();
 updateTransactions();

@@ -32,13 +32,13 @@
         <div class="transaction">
           <h2 class="transaction__title">Добавить новую транзакцию</h2>
           <form action="#" class="transaction__form">
-            <label for="transaction-amount-input" class="transaction__label">Название транзакции</label>
+            <label for="transaction-amount-input" class="transaction__label">Описание транзакции</label>
             <input id="transaction-descr-input" type="text" class="transaction__descr-input"
-              placeholder="Название транзакции">
+              placeholder="Описание транзакции">
             <label for="transaction-amount-input" class="transaction__label">Тип транзакции</label>
             <select id="transaction-type-input" name="transaction-type" class="transaction__type-select">
-              <option value="">Выберите категорию</option>
-              <option value="Пополнения" selected>Пополнения</option>
+              <option value="" disabled selected>Выберите категорию</option>
+              <option value="Пополнение">Пополнение</option>
               <option value="Переводы">Переводы</option>
               <option value="Продукты">Продукты</option>
               <option value="Медицина">Медицина</option>
@@ -49,14 +49,13 @@
               <option value="Другое">Другое</option>
             </select>
             <label for="transaction-amount-input" class="transaction__label">Дата транзакции</label>
-            <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата"
-              value='2020-01-21'>
+            <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата">
             <label for="transaction-amount-input" class="transaction__label">
               Сумма транзакции
               <br>
               (Отрицательное значение - расходы)
             </label>
-            <input id="transaction-amount-input" value='100' type="number" class="transaction__amount-input"
+            <input id="transaction-amount-input" type="number" class="transaction__amount-input"
               placeholder="Сумма">
             <button id="transaction-confirm-btn" class="transaction__confirm-btn">Добавить</button>
           </form>
@@ -87,7 +86,7 @@
         <div class="transaction-history">
           <h2 class="transaction-history__title">Все транзакции</h2>
           <div class="transaction-history__header">
-            <p class="transaction-history__descr">Название</p>
+            <p class="transaction-history__descr">Описание</p>
             <p class="transaction-history__descr">Тип транзакции</p>
             <p class="transaction-history__descr">Карта</p>
             <p class="transaction-history__descr">Дата</p>
@@ -107,4 +106,3 @@
 </body>
 
 </html>
-

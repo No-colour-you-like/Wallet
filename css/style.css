@@ -59,8 +59,8 @@ h2 {
 
 .wallet {
   display: flex;
-  width: 1200px;
-  height: 830px;
+  width: 1250px;
+  height: 840px;
   background-color: #fff;
   border-radius: 30px;
   box-shadow: 0 10px 20px #8991B8FF;
@@ -76,7 +76,7 @@ h2 {
 }
 
 .wallet__content {
-  width: 800px;
+  width: 850px;
   padding: 50px;
 }
 
@@ -197,6 +197,7 @@ h2 {
   font-size: 20px;
   color: #4A6EC9FF;
   font-weight: 600;
+  outline: none;
 }
 
 .transaction__confirm-btn {
@@ -249,7 +250,7 @@ h2 {
 }
 
 .transaction-history {
-  width: 720px;
+  width: 770px;
 }
 
 .transaction-history__title {
@@ -263,7 +264,7 @@ h2 {
 }
 
 .transaction-history__descr:nth-of-type(1) {
-  width: 200px;
+  width: 250px;
 }
 
 .transaction-history__descr:nth-of-type(2) {
@@ -284,7 +285,7 @@ h2 {
 }
 
 .transaction-history__content {
-  height: 220px;
+  height: 240px;
   overflow-y: scroll;
 }
 
@@ -358,6 +359,7 @@ h2 {
   background-color: #DDE4F5FF;
   width: 40px;
   height: 40px;
+  margin-right: 10px;
   border-radius: 50%;
 }
 

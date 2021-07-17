@@ -39,12 +39,12 @@ function CardSingleInfo(id, name, number, owner, balance) {
 }
 
 const transactionsArr = [
-  new TransactionInfo('0', 'Зарплата', 'Пополнение', '**** 1234', '12.05.2021', 1000)
+  new TransactionInfo('0', 'Salary', 'Refill', '**** 1234', '12.05.2021', 1000)
 ];
 
 const cardsArr = [
-  new CardSingleInfo('0', 'Персональная карта', '1234', 'Jack Jackson', 1000),
-  new CardSingleInfo('1', 'Рабочая карта', '6789', 'Jack Jackson', 0)
+  new CardSingleInfo('0', 'Personal card', '1234', 'Jack Jackson', 1000),
+  new CardSingleInfo('1', 'Salary card', '6789', 'Jack Jackson', 0)
 ];
 
 
@@ -159,31 +159,31 @@ const addTransactionToList = () => {
   };
 
   switch (lastTransaction.type) {
-    case 'Пополнение':
+    case 'Refill':
       transactionImgLink('refund.svg');
       break;
-    case 'Переводы':
+    case 'Transfer':
       transactionImgLink('dollar.svg');
       break;
-    case 'Продукты':
+    case 'Products':
       transactionImgLink('cart.svg');
       break;
-    case 'Медицина':
+    case 'Medicine':
       transactionImgLink('heart.svg');
       break;
-    case 'Рестораны':
+    case 'Restaurants':
       transactionImgLink('burger.svg');
       break;
-    case 'Услуги':
+    case 'Services':
       transactionImgLink('tools.svg');
       break;
-    case 'Развлечения':
+    case 'Entertainments':
       transactionImgLink('popcorn.svg');
       break;
-    case 'Транспорт':
+    case 'Transport':
       transactionImgLink('bus.svg');
       break;
-    case 'Другое':
+    case 'Other':
       transactionImgLink('credit-card.svg');
       break;
   }

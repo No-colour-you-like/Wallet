@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wallet</title>
 
-
+  <link rel="icon" href="img/wallet.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
     crossorigin="anonymous" />
@@ -19,7 +19,7 @@
     <main class="wallet">
       <aside class="wallet__panel">
         <div class="cards">
-          <h2 class="cards__title">Ваши карты</h2>
+          <h2 class="cards__title">Your cards</h2>
           <div class="cards__slide-btns">
             <div id="cards-prev-btn" class="cards__slide-btn">&#10140</div>
             <div id="cards-next-btn" class="cards__slide-btn">&#10140</div>
@@ -30,51 +30,49 @@
           </div>
         </div>
         <div class="transaction">
-          <h2 class="transaction__title">Добавить новую транзакцию</h2>
-          <form action="#" class="transaction__form">
-            <label for="transaction-amount-input" class="transaction__label">Описание транзакции</label>
-            <input id="transaction-descr-input" type="text" class="transaction__descr-input"
-              placeholder="Описание транзакции">
-            <label for="transaction-amount-input" class="transaction__label">Тип транзакции</label>
+          <h2 class="transaction__title">Add new transaction</h2>
+          <form class="transaction__form">
+            <label for="transaction-amount-input" class="transaction__label">Description</label>
+            <input id="transaction-descr-input" type="text" class="transaction__descr-input" placeholder="Description">
+            <label for="transaction-amount-input" class="transaction__label">Type</label>
             <select id="transaction-type-input" name="transaction-type" class="transaction__type-select">
-              <option value="" disabled selected>Выберите категорию</option>
-              <option value="Пополнение">Пополнение</option>
-              <option value="Переводы">Переводы</option>
-              <option value="Продукты">Продукты</option>
-              <option value="Медицина">Медицина</option>
-              <option value="Рестораны">Рестораны</option>
-              <option value="Услуги">Услуги</option>
-              <option value="Развлечения">Развлечения</option>
-              <option value="Транспорт">Транспорт</option>
-              <option value="Другое">Другое</option>
+              <option value="" disabled selected>Choose category</option>
+              <option value="Refill">Refill</option>
+              <option value="Transfer">Transfer</option>
+              <option value="Products">Products</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Restaurants">Restaurants</option>
+              <option value="Services">Services</option>
+              <option value="Entertainments">Entertainments</option>
+              <option value="Transport">Transport</option>
+              <option value="Other">Other</option>
             </select>
-            <label for="transaction-amount-input" class="transaction__label">Дата транзакции</label>
-            <input id="transaction-date-input" type="date" class="transaction__date-input" placeholder="Дата">
+            <label for="transaction-amount-input" class="transaction__label">Transaction date</label>
+            <input id="transaction-date-input" type="date" class="transaction__date-input">
             <label for="transaction-amount-input" class="transaction__label">
-              Сумма транзакции
+              Transaction amount
               <br>
-              (Отрицательное значение - расходы)
+              (Negative value - costs)
             </label>
-            <input id="transaction-amount-input" type="number" class="transaction__amount-input"
-              placeholder="Сумма">
-            <button id="transaction-confirm-btn" class="transaction__confirm-btn">Добавить</button>
+            <input id="transaction-amount-input" type="number" class="transaction__amount-input" placeholder="Amount">
+            <button id="transaction-confirm-btn" class="transaction__confirm-btn">Add transaction</button>
           </form>
         </div>
       </aside>
       <div class="wallet__content">
         <div class="spendings">
-          <h2 class="spendings__title">Обзор</h2>
+          <h2 class="spendings__title">Overview</h2>
           <div class="spendings__content">
             <div class="spendings__single">
-              <p class="spendings__single-title">Текущий баланс</p>
+              <p class="spendings__single-title">Current balance</p>
               <div id="balance-current" class="spendings__single-amount">0</div>
             </div>
             <div class="spendings__single">
-              <p class="spendings__single-title">Доходы</p>
+              <p class="spendings__single-title">Income</p>
               <div id="balance-up" class="spendings__single-amount">0</div>
             </div>
             <div class="spendings__single">
-              <p class="spendings__single-title">Расходы</p>
+              <p class="spendings__single-title">Costs</p>
               <div id="balance-down" class="spendings__single-amount">0</div>
             </div>
           </div>
@@ -84,13 +82,13 @@
           <canvas id="myChart" class="chart" width="700px" height="300px"></canvas>
         </div>
         <div class="transaction-history">
-          <h2 class="transaction-history__title">Все транзакции</h2>
+          <h2 class="transaction-history__title">All transactions</h2>
           <div class="transaction-history__header">
-            <p class="transaction-history__descr">Описание</p>
-            <p class="transaction-history__descr">Тип транзакции</p>
-            <p class="transaction-history__descr">Карта</p>
-            <p class="transaction-history__descr">Дата</p>
-            <p class="transaction-history__descr">Сумма</p>
+            <p class="transaction-history__descr">Description</p>
+            <p class="transaction-history__descr">Type</p>
+            <p class="transaction-history__descr">Card</p>
+            <p class="transaction-history__descr">Date</p>
+            <p class="transaction-history__descr">Amount</p>
           </div>
           <div id="transaction-history" class="transaction-history__content">
           </div>
